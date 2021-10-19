@@ -4,7 +4,7 @@ local M = {};
 M.setup_lsp = function (on_attach, capabilities)
 
   local lsp_config = require("lspconfig")
-  local servers = {"hls", "rust_analyzer"};
+  local servers = {"hls", "rust_analyzer", "jdtls"};
 
   for _, lsp in ipairs(servers) do
   lsp_config[lsp].setup {

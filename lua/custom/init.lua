@@ -37,12 +37,11 @@ hooks.add("install_plugins", function(use)
   use {
     "ironhouzi/starlite-nvim",
     config = function()
-      require("core.hooks").add("setup_mappings", function(map)
-        map("n", "*", ":lua require'starlite'.star()<CR>", opt)
-        map("n", "g*", ":lua require'starlite'.g_star()<CR>", opt)
-        map("n", "#", ":lua require'starlite'.hash()<CR>", opt)
-        map("n", "g#", ":lua require'starlite'.g_hash()<CR>", opt)
-      end) 
+      local map = require("core.utils").map
+      map("n", "*", ":lua require'starlite'.star()<CR>", opt)
+      map("n", "g*", ":lua require'starlite'.g_star()<CR>", opt)
+      map("n", "#", ":lua require'starlite'.hash()<CR>", opt)
+      map("n", "g#", ":lua require'starlite'.g_hash()<CR>", opt)
     end,
   }
 
@@ -51,14 +50,13 @@ hooks.add("install_plugins", function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup {
-        require("core.hooks").add("setup_mappings", function(map)
-          map("n", m.open, ":Trouble<cr>", opt)
-          map("n", m.workspace_diagnostics, ":Trouble lsp_workspace_diagnostics<cr>", opt)
-          map("n", m.document_diagnostics, ":Trouble lsp_document_diagnostics<cr>", opt)
-          map("n", m.loclist, ":Trouble loclist<cr>", opt)
-          map("n", m.quickfix, ":Trouble quickfix<cr>", opt)
-          map("n", m.lsp_references, ":Trouble lsp_references<cr>", opt)
-        end)
+        -- local map = require("core.utils").map
+        -- map("n", m.open, ":Trouble<cr>", opt)
+        -- map("n", m.workspace_diagnostics, ":Trouble lsp_workspace_diagnostics<cr>", opt)
+        -- map("n", m.document_diagnostics, ":Trouble lsp_document_diagnostics<cr>", opt)
+        -- map("n", m.loclist, ":Trouble loclist<cr>", opt)
+        -- map("n", m.quickfix, ":Trouble quickfix<cr>", opt)
+        -- map("n", m.lsp_references, ":Trouble lsp_references<cr>", opt)
       }
     end
   }
@@ -87,6 +85,32 @@ hooks.add("install_plugins", function(use)
     requires = "nvim-lua/plenary.nvim",
     after = "nvim-treesitter"
   }
+
+  use {
+    "mfussenegger/nvim-dap",
+    event = VimEnter,
+    config = function()
+      require("custom.dap").setup()
+    end,
+  }
+
+  use {
+    "theHamsta/nvim-dap-virtual-text",
+    event = VimEnter,
+    requires = "nvim-dap",
+    config = function()
+      vim.g.dap_virtual_text = true
+    end,
+  }
+
+  use {
+    "blackCauldron7/surround.nvim",
+    event = VimEnter,
+    config = function()
+      require"surround".setup {mappings_style = "sandwich"}
+    end
+  }
+
 end)
 
 -- 
