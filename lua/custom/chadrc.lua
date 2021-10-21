@@ -4,39 +4,39 @@
 local M = {}
 M.ui = {}
 M.mappings = {
-  window_alternative = {'n', '<leader>w', '<C-w>', {silent = true, noremap = true}},
+   window_alternative = { "n", "<leader>w", "<C-w>", { silent = true, noremap = true } },
 }
 
 M.options = {
-   tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
+   tabstop = 2, -- Number of spaces that a <Tab> in the file counts for
 }
 
 M.plugins = {
-  status = {
-    dashboard = true,
-    colorizer = true
-  },
-  options = {
-    lspconfig = {
-      setup_lspconf = "custom.plugins.lspconfig"
-    }
-  },
-  default_plugin_config_replace = {
-    nvim_cmp = "custom.plugins.cmp",
-    nvim_treesitter = "custom.plugins.treesitter"
-  },
+   status = {
+      dashboard = true,
+      colorizer = true,
+   },
+   options = {
+      lspconfig = {
+         setup_lspconf = "custom.plugins.lspconfig",
+      },
+   },
+   default_plugin_config_replace = {
+      nvim_cmp = "custom.plugins.cmp",
+      nvim_treesitter = "custom.plugins.treesitter",
+   },
 }
 
 M.mappings = {
-  terminal = {
+   terminal = {
       pick_term = "<leader>tW",
       new_horizontal = "<leader>th",
       new_vertical = "<leader>tv",
-      new_window = "<leader>tw"
+      new_window = "<leader>tw",
    },
 
    nvimtree = {
-      focus = "<leader>t"
+      focus = "<leader>t",
    },
 }
 

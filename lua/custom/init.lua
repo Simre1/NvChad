@@ -21,7 +21,7 @@ local hooks = require "core.hooks"
 -- you can set one or many mappings
 -- example below:
 
-local opt = {silent = true, noremap = true};
+local opt = { silent = true, noremap = true }
 
 hooks.add("setup_mappings", function(map)
    -- map("n", "<leader>cc", "gg0vG$d", opt) -- example to delete the buffer
@@ -34,86 +34,87 @@ end)
 -- examples below:
 
 hooks.add("install_plugins", function(use)
-  use {
-    "ironhouzi/starlite-nvim",
-    config = function()
-      local map = require("core.utils").map
-      map("n", "*", ":lua require'starlite'.star()<CR>", opt)
-      map("n", "g*", ":lua require'starlite'.g_star()<CR>", opt)
-      map("n", "#", ":lua require'starlite'.hash()<CR>", opt)
-      map("n", "g#", ":lua require'starlite'.g_hash()<CR>", opt)
-    end,
-  }
+   use {
+      "ironhouzi/starlite-nvim",
+      config = function()
+         local map = require("core.utils").map
+         map("n", "*", ":lua require'starlite'.star()<CR>", opt)
+         map("n", "g*", ":lua require'starlite'.g_star()<CR>", opt)
+         map("n", "#", ":lua require'starlite'.hash()<CR>", opt)
+         map("n", "g#", ":lua require'starlite'.g_hash()<CR>", opt)
+      end,
+   }
 
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- local map = require("core.utils").map
-        -- map("n", m.open, ":Trouble<cr>", opt)
-        -- map("n", m.workspace_diagnostics, ":Trouble lsp_workspace_diagnostics<cr>", opt)
-        -- map("n", m.document_diagnostics, ":Trouble lsp_document_diagnostics<cr>", opt)
-        -- map("n", m.loclist, ":Trouble loclist<cr>", opt)
-        -- map("n", m.quickfix, ":Trouble quickfix<cr>", opt)
-        -- map("n", m.lsp_references, ":Trouble lsp_references<cr>", opt)
-      }
-    end
-  }
+   use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+         require("trouble").setup {
+            -- local map = require("core.utils").map
+            -- map("n", m.open, ":Trouble<cr>", opt)
+            -- map("n", m.workspace_diagnostics, ":Trouble lsp_workspace_diagnostics<cr>", opt)
+            -- map("n", m.document_diagnostics, ":Trouble lsp_document_diagnostics<cr>", opt)
+            -- map("n", m.loclist, ":Trouble loclist<cr>", opt)
+            -- map("n", m.quickfix, ":Trouble quickfix<cr>", opt)
+            -- map("n", m.lsp_references, ":Trouble lsp_references<cr>", opt)
+         }
+      end,
+   }
 
-  use {
-    "nvim-neorg/neorg",
-    config = function()
-      local present, neorg = pcall(require, "neorg")
-      if not present then return end
-      neorg.setup {
-          -- Tell Neorg what modules to load
-          load = {
-              ["core.defaults"] = {}, -- Load all the default modules
-              -- ["core.norg.concealer"] = {}, -- Allows for use of icons
-              ["core.norg.dirman"] = { -- Manage your directories with Neorg
-                  config = {workspaces = {my_workspace = "~/neorg"}}
-              },
-              ["core.norg.completion"] = {
+   use {
+      "nvim-neorg/neorg",
+      config = function()
+         local present, neorg = pcall(require, "neorg")
+         if not present then
+            return
+         end
+         neorg.setup {
+            -- Tell Neorg what modules to load
+            load = {
+               ["core.defaults"] = {}, -- Load all the default modules
+               -- ["core.norg.concealer"] = {}, -- Allows for use of icons
+               ["core.norg.dirman"] = { -- Manage your directories with Neorg
+                  config = { workspaces = { my_workspace = "~/neorg" } },
+               },
+               ["core.norg.completion"] = {
                   config = {
-                      engine = "nvim-cmp" -- We current support nvim-compe and nvim-cmp only
-                  }
-              }
-          }
-      }
-    end,
-    requires = "nvim-lua/plenary.nvim",
-    after = "nvim-treesitter"
-  }
+                     engine = "nvim-cmp", -- We current support nvim-compe and nvim-cmp only
+                  },
+               },
+            },
+         }
+      end,
+      requires = "nvim-lua/plenary.nvim",
+      after = "nvim-treesitter",
+   }
 
-  use {
-    "mfussenegger/nvim-dap",
-    event = VimEnter,
-    config = function()
-      require("custom.dap").setup()
-    end,
-  }
+   use {
+      "mfussenegger/nvim-dap",
+      event = VimEnter,
+      config = function()
+         require("custom.dap").setup()
+      end,
+   }
 
-  use {
-    "theHamsta/nvim-dap-virtual-text",
-    event = VimEnter,
-    requires = "nvim-dap",
-    config = function()
-      vim.g.dap_virtual_text = true
-    end,
-  }
+   use {
+      "theHamsta/nvim-dap-virtual-text",
+      event = VimEnter,
+      requires = "nvim-dap",
+      config = function()
+         vim.g.dap_virtual_text = true
+      end,
+   }
 
-  use {
-    "blackCauldron7/surround.nvim",
-    event = VimEnter,
-    config = function()
-      require"surround".setup {mappings_style = "sandwich"}
-    end
-  }
-
+   use {
+      "blackCauldron7/surround.nvim",
+      event = VimEnter,
+      config = function()
+         require("surround").setup { mappings_style = "sandwich" }
+      end,
+   }
 end)
 
--- 
+--
 -- end)
 
 -- alternatively, put this in a sub-folder like "lua/custom/plugins/mkdir"
